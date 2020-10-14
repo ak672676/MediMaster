@@ -6,13 +6,13 @@ export default createStore({
   state: {
     isLoggedIn:false,
     // apiUrl:`${window.location.protocol}//${window.location.hostname}/api`,
-    apiUrl:`${window.location.protocol}//${window.location.hostname}:${process.env.PORT}/api`,
+    apiUrl:`${window.location.protocol}//${window.location.hostname}:${window.location.port}/api`,
     username:null,
     userId:null,
     isAdmin:false,
     discount:0
   },
-  
+
   mutations: {
     authenticate(state){
       state.isLoggedIn=auth.isLoggedIn();
