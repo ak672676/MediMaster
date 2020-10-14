@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {      
-    "start": "set NODE_ENV=production & node prod-server/index.js",
+    "start": "SET NODE_ENV=production & node prod-server/index.js",
     "serve": "vue-cli-service serve --host localhost",
-    "build": "set NODE_ENV=production & babel dev-server --out-dir prod-server & vue-cli-service build",
+    "build": "SET NODE_ENV=production & babel dev-server --out-dir prod-server & vue-cli-service build",
     "install-client":"npm install",
     "heroku-postbuild":"npm run install-client & npm run build",
     "lint": "vue-cli-service lint",
