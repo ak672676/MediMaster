@@ -5,13 +5,14 @@ import * as auth from '../services/AuthService';
 export default createStore({
   state: {
     isLoggedIn:false,
-    apiUrl:`${window.location.protocol}//${window.location.hostname}/api`,
-    // apiUrl:`${window.location.protocol}//${window.location.hostname}:8080/api`,
+    // apiUrl:`${window.location.protocol}//${window.location.hostname}/api`,
+    apiUrl:`${window.location.protocol}//${window.location.hostname}:${process.env.PORT}/api`,
     username:null,
     userId:null,
     isAdmin:false,
     discount:0
   },
+  
   mutations: {
     authenticate(state){
       state.isLoggedIn=auth.isLoggedIn();
