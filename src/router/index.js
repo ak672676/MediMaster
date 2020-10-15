@@ -13,6 +13,10 @@ import Register from "../views/authentication/Register.vue";
 import MedicineCreate from "../views/medicines/MedicineCreate.vue";
 import MedicinesAll from "../views/medicines/MedicinesAll";
 import MedicineEdit from "../views/medicines/MedicineEdit.vue";
+import MedicineSearch from "../views/medicines/MedicineSearch";
+import LedgerSearch from "../views/ledger/LedgerSearch";
+import LedgerDetail from "../views/ledger/LedgerDetail";
+
 import * as auth from "../services/AuthService";
 
 console.log("holaaaaaaaaaaaaaa");
@@ -51,6 +55,42 @@ const routes = [
     path:"/medicine/:id",
     name:'medicine-edit',
     component:MedicineEdit,
+    beforeEnter:(to,from,next)=>{
+      if(auth.isLoggedIn()){
+        next();
+      }else{
+        next("/login");
+      }
+    }
+   },
+   {
+    path:"/medicine/search",
+    name:'medicine-search',
+    component:MedicineSearch,
+    beforeEnter:(to,from,next)=>{
+      if(auth.isLoggedIn()){
+        next();
+      }else{
+        next("/login");
+      }
+    }
+   },
+   {
+    path:"/ledger/search",
+    name:'ledger-search',
+    component:LedgerSearch,
+    beforeEnter:(to,from,next)=>{
+      if(auth.isLoggedIn()){
+        next();
+      }else{
+        next("/login");
+      }
+    }
+   },
+   {
+    path:"/ledger/:id",
+    name:'ledger-detail',
+    component:LedgerDetail,
     beforeEnter:(to,from,next)=>{
       if(auth.isLoggedIn()){
         next();

@@ -17,5 +17,9 @@ export function deleteMedicine(id) {
 }
 
 export function updateMedicine(medicine) {
-    return http().put('/medicine', medicine);
+    return http().put('/medicine',medicine);
+}
+
+export function searchMedicine(keyword) {
+    return http().get(`/medicine/search/${keyword}`);
 }

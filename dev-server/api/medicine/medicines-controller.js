@@ -85,3 +85,33 @@ export function show(req,res){
         return res.status(200).json({medicine:medicine});
     })
 }
+
+export function search(req,res){
+    let medicines=[];
+    // var flag=0;
+    Medicine.find({"name":{$regex:req.params.keyword,$options:'i'}},(error,medicinesByName)=>{
+        if(error){
+            return res.status(500).json();
+        }
+        if(medicinesByName)
+            medicines.push(...medicinesByName);
+        Medicine.find({"composition":{$regex:req.params.keyword,$options:'i'}},(error,medicinesByComposition)=>{
+            if(error){
+                return res.status(500).json();
+            }
+            if(medicinesByComposition){
+                // for(var med in medicinesByComposition){
+                    
+                //     for(var medi in medicinesByComposition){
+                //         if(medi.name==med.name){
+                //             flag;
+                //         }
+                //     }
+                // }
+                medicines.push(...medicinesByComposition);
+            }
+            return res.status(200).json({medicines:medicines});
+        })
+        // return res.status(200).json({medicines:medicines});
+    })
+}

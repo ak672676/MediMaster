@@ -16,6 +16,13 @@ var userSchema = new _mongoose2.default.Schema({
     email: String,
     password: String,
     discount: Number,
+    ledger: [{
+        debit: Number,
+        credit: Number,
+        total: Number,
+        remark: String,
+        date: Date
+    }],
     isAdmin: { type: Boolean, default: false }
 });
 userSchema.set('timestamps', true);

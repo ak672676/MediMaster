@@ -64,8 +64,6 @@ export default {
            }
             await medicineService.createMedicine(request);
                 // await create(request);
-
-           
             this.$router.push({name:'medicines-all'});
         }
     }

@@ -25,6 +25,7 @@ var router = _express2.default.Router();
 router.post("/medicine", auth.requireLogin, controller.create);
 router.get("/medicine", auth.requireLogin, controller.index);
 router.get("/medicine/:id", auth.requireLogin, controller.show);
+router.get("/medicine/search/:keyword", auth.requireLogin, controller.search);
 router.put("/medicine", auth.requireLogin, controller.update);
 router.delete("/medicine/:id", auth.requireLogin, controller.remove);
 

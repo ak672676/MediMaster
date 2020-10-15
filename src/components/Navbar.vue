@@ -31,6 +31,16 @@
                         </router-link>
                     </li>
                     <li v-if="$store.state.isLoggedIn" class="nav-item">
+                        <router-link to="/medicine/search" class="nav-link" exact>
+                            Search
+                        </router-link>
+                    </li>
+                    <li v-if="$store.state.isLoggedIn" class="nav-item">
+                        <router-link to="/ledger/search" class="nav-link" exact>
+                            Ledger
+                        </router-link>
+                    </li>
+                    <li v-if="$store.state.isLoggedIn" class="nav-item">
                         <a v-on:click.prevent="logout()" class="nav-link" href="#">Logout</a>
                     </li>
                     <li class="nav-item">
