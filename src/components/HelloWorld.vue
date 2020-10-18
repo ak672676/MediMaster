@@ -1,12 +1,13 @@
 <template>
   <div class="jumbotron custom-bg-dark">
-    <h1 class="display-4">Hello, Amit!</h1>
-    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <h1 class="display-4" v-if="!$store.state.username">Hii,</h1>
+    <h1 class="display-4" v-if="$store.state.username">Hii,{{$store.state.username.toUpperCase()}}</h1>
+    <p class="lead">Always laugh when you can, it is cheap medicine.</p>
     <hr class="my-4">
-    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-    <p class="lead">
+    <p>Have a wonderful day ahead</p>
+    <!-- <p class="lead">
       <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-    </p>
+    </p> -->
   </div>
 </template>
 

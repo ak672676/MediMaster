@@ -19,7 +19,7 @@ export default {
     })
     .then(res=>res.json())
     .then(res=>{
-      console.log(res);
+      console.log("Home Page ",res);
     })
   }
 }

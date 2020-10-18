@@ -10,13 +10,34 @@ var _mongoose2 = _interopRequireDefault(_mongoose);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// const medicineSchema=new mongoose.Schema({
+//     name:String,
+//     composition:String,
+//     packing:String,
+//     company:String,
+//     mrp:Number,
+//     rate:Number
+// });
+
+
 var medicineSchema = new _mongoose2.default.Schema({
-    name: String,
+    name: { type: String, required: true },
     composition: String,
     packing: String,
     company: String,
-    mrp: Number,
-    rate: Number
+    hsn: String,
+    batch: [{
+        batchNo: String,
+        quantity: Number,
+        exp: Date,
+        bonus: String,
+        mrp: Number,
+        rate: Number,
+        cgst: Number,
+        sgst: Number,
+        disableVisibility: { type: Boolean, default: false }
+    }]
+
 });
 
 medicineSchema.set('timestamps', true);

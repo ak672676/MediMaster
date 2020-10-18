@@ -35,9 +35,14 @@
                             Search
                         </router-link>
                     </li>
-                    <li v-if="$store.state.isLoggedIn" class="nav-item">
+                    <li v-if="$store.state.isLoggedIn && $store.state.isAdmin" class="nav-item">
                         <router-link to="/ledger/search" class="nav-link" exact>
                             Ledger
+                        </router-link>
+                    </li>
+                    <li v-if="$store.state.isLoggedIn && !$store.state.isAdmin" class="nav-item">
+                        <router-link to="/ledger/view" class="nav-link" exact>
+                            Ledger View
                         </router-link>
                     </li>
                     <li v-if="$store.state.isLoggedIn" class="nav-item">
@@ -46,10 +51,7 @@
                     <li class="nav-item">
                     
                         <a class="nav-link" href="#">
-                             
-                           
                             {{ $store.state.username ? $store.state.username : 'User' }}
-                          
                         </a>
                     </li>
                 </ul>

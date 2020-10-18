@@ -6,8 +6,8 @@ export default createStore({
   state: {
     isLoggedIn:false,
     // apiUrl:`${window.location.protocol}//${window.location.hostname}/api`,
-    apiUrl:`${window.location.protocol}//${window.location.hostname}:${window.location.port}/api`,
-    // apiUrl:`${window.location.protocol}//${window.location.hostname}:8080/api`,
+    // apiUrl:`${window.location.protocol}//${window.location.hostname}:${window.location.port}/api`,
+    apiUrl:`${window.location.protocol}//${window.location.hostname}:8080/api`,
 
     username:null,
     userId:null,

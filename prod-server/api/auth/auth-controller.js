@@ -23,16 +23,15 @@ function index(req, res) {
 
     _userModel2.default.findOne({ email: req.body.email }, function (error, user) {
         if (error) {
-            return res.status(500).json();
+            return res.status(500).json({ message: "Internal Server Error" });
         }
         if (!user) {
-            return res.status(401).json();
+            return res.status(401).json({ message: "Unauthorized client" });
         }
 
         var passwordsMatch = _userModel2.default.passwordMatches(req.body.password, user.password);
-        console.log("pass ", passwordsMatch);
         if (!passwordsMatch) {
-            return res.status(401).json();
+            return res.status(401).json({ message: "Password does not match" });
         }
         var token = (0, _authService.generateJWT)(user);
         return res.status(200).json({ token: token });

@@ -16,6 +16,8 @@ import MedicineEdit from "../views/medicines/MedicineEdit.vue";
 import MedicineSearch from "../views/medicines/MedicineSearch";
 import LedgerSearch from "../views/ledger/LedgerSearch";
 import LedgerDetail from "../views/ledger/LedgerDetail";
+import LedgerView from "../views/ledger/LedgerView";
+
 
 import * as auth from "../services/AuthService";
 
@@ -91,6 +93,18 @@ const routes = [
     path:"/ledger/:id",
     name:'ledger-detail',
     component:LedgerDetail,
+    beforeEnter:(to,from,next)=>{
+      if(auth.isLoggedIn()){
+        next();
+      }else{
+        next("/login");
+      }
+    }
+   },
+   {
+    path:"/ledger/view",
+    name:'ledger-view',
+    component:LedgerView,
     beforeEnter:(to,from,next)=>{
       if(auth.isLoggedIn()){
         next();

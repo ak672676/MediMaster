@@ -10,16 +10,15 @@ export function index(req,res){
 
     User.findOne({email:req.body.email},(error,user)=>{
         if(error){
-            return res.status(500).json();
+            return res.status(500).json({message:"Internal Server Error"});
         }
         if(!user){
-            return res.status(401).json();
+            return res.status(401).json({message:"Unauthorized client"});
         }
 
        const passwordsMatch=User.passwordMatches(req.body.password,user.password);
-       console.log("pass ",passwordsMatch);
        if(!passwordsMatch){
-           return res.status(401).json();
+           return res.status(401).json({message:"Password does not match"});
        }
        const token=generateJWT(user);
        return res.status(200).json({token:token});

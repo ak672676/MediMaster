@@ -32,7 +32,7 @@ userSchema.statics.passwordMatches=function(password,encryptedPassword){
 }
 
 userSchema.pre('save', function(next){
-   
+   var user=this;
     this.shopName=this.shopName.toLowerCase();
     // bcrypt.hash(this.password, 10, (err, encrypted) => {
     //     this.password = encrypted;
@@ -42,8 +42,10 @@ userSchema.pre('save', function(next){
     // var salt = bcrypt.genSaltSync(10);
     // this.password  = bcrypt.hashSync(this.password, salt);
     // next();
-    let hash = bcrypt.hashSync(this.password, 10);
-    this.password=hash;
+    if(user.isModified('password')){
+        let hash = bcrypt.hashSync(this.password, 10);
+        this.password=hash;
+    }
     next();
 })
 export default mongoose.model('user',userSchema);

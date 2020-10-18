@@ -2,6 +2,9 @@
     <div>
         <h1 class="text-center">Register</h1>
         <form class="custom-form" v-on:submit.prevent="onSubmit">
+            <div v-if="error.length>0" class="alert alert-info" role="alert">
+               <p v-for="(e,index) in error" v-bind:key="index">{{e}}</p>
+            </div>
             <div class="form-group">
                 <label for="shopName">Shop Name</label>
                 <input v-model="shopName" type="text" class="form-control" id="shopName" placeholder="Shop Name">
@@ -41,12 +44,13 @@ export default {
             email:'',
             password:'',
             discount:0,
-            isAdmin:false
+            isAdmin:false,
+            error:[],
         }
     },
     methods:{
         onSubmit: async function(){
-           
+           this.error=[];
            const user={
                shopName:this.shopName,
                email:this.email,
@@ -54,11 +58,37 @@ export default {
                discount:this.discount,
                isAdmin:this.isAdmin
            }
-           const registerPromise=auth.registerUser(user);
-        //    const loginPromise=auth.login(user);
-           await Promise.all([registerPromise]);
-           this.$router.push({name:'home'});
+           this.loginValidity();
+            if(this.error.length===0){
+                // const registerPromise=auth.registerUser(user);
+                // await Promise.all([registerPromise]);
+                // this.$router.push({name:'home'});
+                await auth.registerUser(user).then((response)=>{
+                    console.log('RESPONSE');
+                   
+                    if(response.status==201){
+                        this.$router.push({name:'home'});
+                        return;
+                    }
+                    this.error.push(response.response.data.message);
+                  
+                })
+            }
+           
+        },
+        loginValidity:function(){
+            if(!this.email)
+                this.error.push("Enter the Email");
+            if(!this.shopName)
+                this.error.push("Enter the Shop Name");
+            if(!this.password)
+                this.error.push("Enter the Password");
         }
     }
 }
 </script>
+<style scoped>
+p{
+    color: red;
+}
+</style>

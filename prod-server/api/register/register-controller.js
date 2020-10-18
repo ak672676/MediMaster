@@ -26,14 +26,26 @@ function index(req, res) {
         discount: req.body.discount,
         isAdmin: req.body.isAdmin
     });
-    user.save(function (error) {
+
+    _userModel2.default.find({ email: req.body.email }, function (error, shop) {
+
         if (error) {
-            if (error.code === 11000) {
-                return res.status(403).json({ message: "Shop Already Exist" });
-            }
-            return res.status(500).json();
+            return res.status(500).json({ message: "Internal Server Error" });
         }
-        return res.status(201).json();
+        console.log(shop);
+        if (shop.length > 0) {
+            return res.status(403).json({ message: "Shop Already Exist" });
+        }
+        user.save(function (error) {
+            if (error) {
+                if (error.code === 11000) {
+                    return res.status(403).json({ message: "Shop Already Exist" });
+                }
+                return res.status(500).json({ message: "Internal Server Error" });
+            }
+            return res.status(201).json({ message: "Successfully made a new customer" });
+        });
+        // return res.status(201).json({message:"Successfully made a new customer"});
     });
 }
 
@@ -48,7 +60,6 @@ function validateIndex(body) {
     if (_stringUtil.StringUtil.isEmpty(body.email)) {
         errors += 'First name is required. ';
     }
-
     return {
         isValid: _stringUtil.StringUtil.isEmpty(errors),
         message: errors

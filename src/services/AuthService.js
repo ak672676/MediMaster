@@ -11,12 +11,16 @@ export function isLoggedIn(){
 export function login(user){
     return http().post("/auth",user)
     .then(res=>{
-        console.log("a   ",res);
         if(res){
             console.log(res);
             setToken(res.data.token);
+            return res;
         }
         
+    }).catch(err=>{
+        // console.log(err.response.data.message);
+        // console.log(err.response.data.message);
+        return err;
     });
     
 }
@@ -65,7 +69,14 @@ export function checkUserIsAdmin(){
 }
 
 export function registerUser(user){
-    return http().post("/register",user);
+    return http().post("/register",user).then(res=>{
+        if(res){
+            return res;
+        }
+        
+    }).catch(err=>{
+        return err;
+    });
 }
 
 function decodeToken(){

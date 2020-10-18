@@ -49,6 +49,8 @@ function updateLedger(req, res) {
         if (error) {
             return res.status(500).json();
         }
+        console.log("BEFORE SAVE");
+        console.log(shop);
         var ledger = shop.ledger;
         newEntry.total = 0;
         if (ledger.length == 0) {
@@ -68,11 +70,13 @@ function updateLedger(req, res) {
             shop.ledger.push(newEntry);
         }
 
-        shop.save(function (error) {
+        shop.save(function (error, cus) {
             if (error) {
                 console.log("Error");
                 return res.status(500).json();
             }
+            console.log("AFTER SAVE");
+            console.log(cus);
             return res.status(204).json({ message: "All Good" });
         });
     });
